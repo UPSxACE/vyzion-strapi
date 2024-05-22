@@ -379,6 +379,7 @@ export interface ApiHomepageFeatureCardHomepageFeatureCard
     title: Attribute.String & Attribute.Required;
     paragraph: Attribute.Text & Attribute.Required;
     icon: Attribute.String & Attribute.CustomField<'plugin::react-icons.icon'>;
+    color: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

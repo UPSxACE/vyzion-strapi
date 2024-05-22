@@ -28,6 +28,11 @@
     "icon": {
       "type": "customField",
       "customField": "plugin::react-icons.icon"
+    },
+    "color": {
+      "type": "string",
+      "required": true,
+      "regex": "^#(?:[0-9a-fA-F]{3}){1,2}$"
     }
   }
 }
