@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "homepage_texts",
+  "info": {
+    "singularName": "homepage-text",
+    "pluralName": "homepage-texts",
+    "displayName": "Homepage Text"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "field": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "value": {
+      "type": "text",
+      "required": true,
+      "unique": false
+    }
+  }
+}
