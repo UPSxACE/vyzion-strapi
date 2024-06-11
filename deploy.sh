@@ -11,7 +11,7 @@ container_running() {
 }
 
 container_name="portainer"
-if container_exists "$container_name"; then
+if container_running "$container_name"; then
   echo "Proceeding with the existing container..."
 else
   echo "Creating a new container..."
