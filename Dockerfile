@@ -8,11 +8,11 @@ ENV NODE_ENV=${NODE_ENV}
 ARG CERTRESOLVER
 ARG HOSTNAME
 # Set labels using build arguments
-LABEL traefik.enable=true
-LABEL traefik.http.routers.api.rule=Host(`$HOSTNAME`)
-LABEL traefik.http.routers.api.entrypoints=websecure
-LABEL traefik.http.routers.api.tls=true
-LABEL traefik.http.routers.api.tls.certresolver=$CERTRESOLVER
+LABEL "traefik.enable"="true"
+LABEL "traefik.http.routers.api.rule"="Host(`$HOSTNAME`)"
+LABEL "traefik.http.routers.api.entrypoints"="websecure"
+LABEL "traefik.http.routers.api.tls"="true"
+LABEL "traefik.http.routers.api.tls.certresolver"="$CERTRESOLVER"
 
 WORKDIR /opt/
 COPY package.json package-lock.json ./
