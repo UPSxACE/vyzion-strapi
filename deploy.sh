@@ -2,7 +2,7 @@
 container_running() {
   container_name=$1
   container_status=$(docker inspect -f '{{.State.Running}}' ${container_name} 2>/dev/null)
-  if["$container_status" == "true"]; then
+  if [ "$container_status" == "true" ]; then
     echo "Container '$container_name' exists."
     return 0
   else
