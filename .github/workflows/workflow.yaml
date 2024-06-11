@@ -1,0 +1,36 @@
+# name: Continuous Integration
+# on:
+#   pull_request:
+#     branches: ["master"]
+#   push:
+#     branches: ["master"]
+# jobs:
+#   # continuous-integration:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     # git clone my rep -> git checkout to the branch of the push
+#   #     - uses: actions/checkout@v3
+#   #     - name: Using Node.jobs
+#   #       uses: actions/setup-node@v2
+#   #       with:
+#   #         node-version: 18.x
+#   #     - name: run install, build and test
+#   #       run: |
+#   #         npm install
+#   #         npm run build
+#   #         npm run test
+#   continuous-delivery:
+#     runs-on: ubuntu-latest
+#     # needs: continuous-integration
+#     steps:
+#       # - name: Repo checkout
+#       #   uses: action/checkout@v4
+#       - name: Hatz Deploy
+#         uses: appleboy/ssh-action@master
+#         with:
+#           username: <your username>
+#           host: <your domain>
+#           password: ${{ secrets.SSH_PASSWORD }}
+#           script: |
+#             cd /var/www/html
+#             ./server_deploy.sh"
