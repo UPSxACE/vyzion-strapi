@@ -29,6 +29,7 @@ if (process.env.EMAIL_METHOD !== "API") {
   });
 } else {
   // API
+  console.log("Mailer on API mode.");
   sgMail = require("@sendgrid/mail");
   sgMail.setApiKey(process.env.EMAIL_API_KEY);
 }
