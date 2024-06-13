@@ -4,16 +4,6 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-# Custom build arguments here
-ARG CERTRESOLVER
-ARG HOSTNAME
-# Set labels using build arguments
-LABEL traefik.enable=true
-LABEL traefik.http.routers.api.rule=Host(`$HOSTNAME`)
-LABEL traefik.http.routers.api.entrypoints=websecure
-LABEL traefik.http.routers.api.tls=true
-LABEL traefik.http.routers.api.tls.certresolver=$CERTRESOLVER
-
 WORKDIR /opt/
 COPY package.json package-lock.json ./
 RUN npm install -g node-gyp
@@ -25,6 +15,17 @@ RUN npm run build
 
 # Creating final production image
 FROM node:18-alpine
+
+# Custom build arguments here
+ARG CERTRESOLVER
+ARG HOSTNAME
+# Set labels using build arguments
+LABEL "traefik.enable"="true"
+LABEL "traefik.http.routers.web.rule"="Host(`$HOSTNAME`)"
+LABEL "traefik.http.routers.web.entrypoints"="websecure"
+LABEL "traefik.http.routers.web.tls"="true"
+LABEL "traefik.http.routers.web.tls.certresolver"="$CERTRESOLVER"
+
 RUN apk add --no-cache vips-dev
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
