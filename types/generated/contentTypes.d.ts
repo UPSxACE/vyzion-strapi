@@ -362,73 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiHomepageFeatureCardHomepageFeatureCard
-  extends Schema.CollectionType {
-  collectionName: 'homepage_feature_cards';
-  info: {
-    singularName: 'homepage-feature-card';
-    pluralName: 'homepage-feature-cards';
-    displayName: 'Homepage Feature Card';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    field: Attribute.String & Attribute.Required & Attribute.Unique;
-    title: Attribute.String & Attribute.Required;
-    paragraph: Attribute.Text & Attribute.Required;
-    icon: Attribute.String & Attribute.CustomField<'plugin::react-icons.icon'>;
-    color: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::homepage-feature-card.homepage-feature-card',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::homepage-feature-card.homepage-feature-card',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiHomepageTextHomepageText extends Schema.CollectionType {
-  collectionName: 'homepage_texts';
-  info: {
-    singularName: 'homepage-text';
-    pluralName: 'homepage-texts';
-    displayName: 'Homepage Text';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    field: Attribute.String & Attribute.Required & Attribute.Unique;
-    value: Attribute.Text & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::homepage-text.homepage-text',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::homepage-text.homepage-text',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -900,6 +833,106 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiContactContact extends Schema.CollectionType {
+  collectionName: 'contacts';
+  info: {
+    singularName: 'contact';
+    pluralName: 'contacts';
+    displayName: 'Contact';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    email: Attribute.Email & Attribute.Required;
+    subject: Attribute.String & Attribute.Required;
+    message: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomepageFeatureCardHomepageFeatureCard
+  extends Schema.CollectionType {
+  collectionName: 'homepage_feature_cards';
+  info: {
+    singularName: 'homepage-feature-card';
+    pluralName: 'homepage-feature-cards';
+    displayName: 'Homepage Feature Card';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    field: Attribute.String & Attribute.Required & Attribute.Unique;
+    title: Attribute.String & Attribute.Required;
+    paragraph: Attribute.Text & Attribute.Required;
+    icon: Attribute.String & Attribute.CustomField<'plugin::react-icons.icon'>;
+    color: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::homepage-feature-card.homepage-feature-card',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::homepage-feature-card.homepage-feature-card',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomepageTextHomepageText extends Schema.CollectionType {
+  collectionName: 'homepage_texts';
+  info: {
+    singularName: 'homepage-text';
+    pluralName: 'homepage-texts';
+    displayName: 'Homepage Text';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    field: Attribute.String & Attribute.Required & Attribute.Unique;
+    value: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::homepage-text.homepage-text',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::homepage-text.homepage-text',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -910,8 +943,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::homepage-feature-card.homepage-feature-card': ApiHomepageFeatureCardHomepageFeatureCard;
-      'api::homepage-text.homepage-text': ApiHomepageTextHomepageText;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -921,6 +952,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::contact.contact': ApiContactContact;
+      'api::homepage-feature-card.homepage-feature-card': ApiHomepageFeatureCardHomepageFeatureCard;
+      'api::homepage-text.homepage-text': ApiHomepageTextHomepageText;
     }
   }
 }
