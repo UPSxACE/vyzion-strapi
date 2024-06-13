@@ -1,26 +1,37 @@
 "use strict";
 
+const { default: axios } = require("axios");
 const { emailTemplate } = require("./email-template");
 const { createTransport } = require("nodemailer");
 
-const transporter = createTransport({
-  pool: true,
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: true, // use TLS
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+let transporter;
+let sgMail;
 
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Mailer is ready.");
-  }
-});
+if (process.env.EMAIL_METHOD !== "API") {
+  // SMTP
+  transporter = createTransport({
+    pool: true,
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: true, // use TLS
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Mailer is ready.");
+    }
+  });
+} else {
+  // API
+  sgMail = require("@sendgrid/mail");
+  sgMail.setApiKey(process.env.EMAIL_API_KEY);
+}
 
 /**
  * `notificationEmail` middleware
@@ -50,9 +61,14 @@ module.exports = (config, { strapi }) => {
         html: emailHtml,
       };
 
-      await transporter.sendMail(emailConfig);
+      if (process.env.EMAIL_METHOD !== "API") {
+        // SMTP
+        await transporter.sendMail(emailConfig);
+      } else {
+        // API
+        await sgMail.send(emailConfig);
+      }
 
-      // await axios.post("/v2/email/outbound-emails", {
       //   Content: {
       //     Simple: {
       //       Body: {
