@@ -78,6 +78,7 @@ module.exports = (config, { strapi }) => {
     } catch (err) {
       console.log("Error sending email.");
       console.log(err);
+      throw err;
     }
     return result;
   };
