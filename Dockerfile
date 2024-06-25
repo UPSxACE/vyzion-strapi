@@ -21,12 +21,12 @@ ARG CERTRESOLVER
 ARG HOSTNAME
 # Set labels using build arguments
 LABEL "traefik.enable"="true"
-LABEL "traefik.http.routers.vystrapi.rule"="Host(`$HOSTNAME`)"
 LABEL "traefik.http.routers.vystrapi.entrypoints"="websecure"
 LABEL "traefik.http.routers.vystrapi.tls"="true"
 LABEL "traefik.http.routers.vystrapi.tls.certresolver"="$CERTRESOLVER"
 LABEL "traefik.http.routers.vystrapi.service"="vystrapi-service@docker"
 LABEL "traefik.http.services.vystrapi-service.loadbalancer.server.port"="80"
+LABEL "traefik.http.routers.vystrapi-service.rule"="Host(`$HOSTNAME`)"
 LABEL "io.portainer.accesscontrol.public"="true"
 
 RUN apk add --no-cache vips-dev
