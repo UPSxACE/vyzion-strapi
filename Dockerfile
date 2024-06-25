@@ -25,7 +25,7 @@ LABEL "traefik.http.routers.vystrapi.rule"="Host(`$HOSTNAME`)"
 LABEL "traefik.http.routers.vystrapi.entrypoints"="websecure"
 LABEL "traefik.http.routers.vystrapi.tls"="true"
 LABEL "traefik.http.routers.vystrapi.tls.certresolver"="$CERTRESOLVER"
-LABEL "traefik.http.services.vystrapi.loadbalancer.server.port"="443"
+LABEL "traefik.http.services.vystrapi.loadbalancer.server.port"="80"
 LABEL "io.portainer.accesscontrol.public"="true"
 
 RUN apk add --no-cache vips-dev
