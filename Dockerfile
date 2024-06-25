@@ -25,7 +25,7 @@ LABEL "traefik.http.routers.vystrapi.rule"="Host(`$HOSTNAME`)"
 LABEL "traefik.http.routers.vystrapi.entrypoints"="websecure"
 LABEL "traefik.http.routers.vystrapi.tls"="true"
 LABEL "traefik.http.routers.vystrapi.tls.certresolver"="$CERTRESOLVER"
-LABEL "traefik.http.routers.vystrapi.service"="vystrapi-service"
+LABEL "traefik.http.routers.vystrapi.service"="vystrapi-service@docker"
 LABEL "traefik.http.services.vystrapi-service.loadbalancer.server.port"="80"
 LABEL "io.portainer.accesscontrol.public"="true"
 
